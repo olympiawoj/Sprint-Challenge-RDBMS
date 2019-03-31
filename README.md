@@ -33,9 +33,20 @@ This will be akin to the Web API that you built in the last sprint, only this ti
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. Explain the difference between `RDBMS` and `SQL`.
+
+A relational database management system is a database (collection of data for easy retrieval and manipulation) that stores their data in tables - a collection of rows where each row represents a single record and is made up of one more moer columns.
+
 1. Why do tables need a `primary key`?
+
+Tables need a primary key to uniquely identify reach record in the table. For example, if there are two people with the same common name in a table, a primary key will distinctly and uniquely identify them.
+
 1. What is the name given to a table column that references the primary key on another table.
+
+Foriegn key
+
 1. What do we need in order to have a _many to many_ relationship between two tables.
+
+A third table.
 
 ## Project Set Up
 
