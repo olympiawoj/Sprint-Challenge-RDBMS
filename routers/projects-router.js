@@ -32,13 +32,11 @@ router.post("/", (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const project = await db("projects")
-      .join("actions", "projects.project_id", "=", "actions.project_id")
-      .select(
-        "projects.project_id as id",
-        "projects.name",
-        "projects.description"
-      )
-      .where({ "projects.project_id": req.params.id });
+      .where({ "projects.project_id": req.params.id })
+      .first();
+
+    const actions = await db("actions").where({ project_id: req.params.id });
+    project.actions = actions;
     res.status(200).json(project);
   } catch (error) {
     res.status(500).json(error);
