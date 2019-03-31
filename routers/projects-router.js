@@ -28,4 +28,44 @@ router.post("/", (req, res) => {
     .catch(error => res.status(500).json(error));
 });
 
+// - [ ] GET for retrieving a `project` by its `id` that returns an object with the following structure:
+router.get("/:id", async (req, res) => {
+  try {
+    const project = await db("projects")
+      .join("actions", "projects.project_id", "=", "actions.project_id")
+      .select(
+        "projects.project_id as id",
+        "projects.name",
+        "projects.description"
+      )
+      .where({ "projects.project_id": req.params.id });
+    res.status(200).json(project);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;
+
+// ```js
+// {
+//   id: 1,
+//   name: 'project name here',
+//   description: 'the project description',
+//   completed: false, // or true, the database will return 1 for true and 0 for false
+//   actions: [
+//     {
+//       id: 1,
+//       description: 'action description',
+//       notes: 'the action notes',
+//       completed: false // or true
+//     },
+//     {
+//       id: 7,
+//       description: 'another action description',
+//       notes: 'the action notes',
+//       completed: false // or true
+//     }
+//   ]
+// }
+// ```;
